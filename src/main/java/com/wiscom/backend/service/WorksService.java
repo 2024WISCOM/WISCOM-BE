@@ -1,6 +1,8 @@
 package com.wiscom.backend.service;
 
+import com.wiscom.backend.dto.response.WorksDetailResponseDTO;
 import com.wiscom.backend.dto.response.WorksResponseDTO;
+import com.wiscom.backend.entity.WorksEntity;
 import com.wiscom.backend.repository.WorksRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,5 +19,10 @@ public class WorksService {
         return worksRepository.findAll().stream()
                 .map(WorksResponseDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    public WorksDetailResponseDTO getWorkDetail(Long id) {
+        WorksEntity work = worksRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Work not found"));
+        return new WorksDetailResponseDTO(work);
     }
 }
