@@ -16,4 +16,6 @@ public class guestbookService {
         guestbookEntity entity = new guestbookEntity(dto.getAuthor(), dto.getMessage(), dto.getRecipient());
         return repository.save(entity);
     }
+
+
 }
