@@ -24,7 +24,6 @@ public class WorksEntity {
     private String imageUrl;
 
     //상세 페이지
-    private String pptImages;
     private String shortDescription;
     private String deployUrl;
     private String teamName;
@@ -32,18 +31,4 @@ public class WorksEntity {
     private String githubUrl;
     private String description;
 
-
-    public WorksEntity(String title, String category, String imageUrl, String pptImages, String shortDescription,
-                       String deployUrl, String teamName, String instagramUrl, String githubUrl, String description) {
-        this.title = title;
-        this.category = category;
-        this.imageUrl = imageUrl;
-        this.pptImages = pptImages;
-        this.shortDescription = shortDescription;
-        this.deployUrl = deployUrl;
-        this.teamName = teamName;
-        this.instagramUrl = instagramUrl;
-        this.githubUrl = githubUrl;
-        this.description = description;
-    }
 }

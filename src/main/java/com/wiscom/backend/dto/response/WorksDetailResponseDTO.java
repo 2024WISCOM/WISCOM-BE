@@ -7,7 +7,6 @@ import lombok.Getter;
 public class WorksDetailResponseDTO {
     private Long id;
     private String title;
-    private String pptImages;
     private String shortDescription;
     private String deployUrl;
     private String teamName;
@@ -19,7 +18,6 @@ public class WorksDetailResponseDTO {
         this.id = work.getId();
         this.title = work.getTitle();
 
-        this.pptImages = work.getPptImages();
         this.shortDescription = work.getShortDescription();
         this.deployUrl = work.getDeployUrl();
         this.teamName = work.getTeamName();
