@@ -25,4 +25,10 @@ public class WorksService {
         WorksEntity work = worksRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Work not found"));
         return new WorksDetailResponseDTO(work);
     }
+
+    public List<WorksResponseDTO> getWorksByCategory(String category) {
+        return worksRepository.findByCategory(category).stream()
+                .map(WorksResponseDTO::new)
+                .collect(Collectors.toList());
+    }
 }
