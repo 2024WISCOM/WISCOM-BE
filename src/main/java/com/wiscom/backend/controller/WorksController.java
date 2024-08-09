@@ -7,10 +7,7 @@ import com.wiscom.backend.service.WorksService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +31,13 @@ public class WorksController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ResponseDTO<>(HttpStatus.OK.value(), "Work detail 데이터를 성공적으로 조회했습니다.", workDetail));
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity<ResponseDTO<List<WorksResponseDTO>>> getWorksByCategory(@RequestParam String category) {
+        List<WorksResponseDTO> works = workService.getWorksByCategory(category);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDTO<>(HttpStatus.OK.value(), "카테고리별 Works 데이터를 성공적으로 조회했습니다.", works));
     }
 }
