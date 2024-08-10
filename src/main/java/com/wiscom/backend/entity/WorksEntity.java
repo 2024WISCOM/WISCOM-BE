@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -30,5 +32,8 @@ public class WorksEntity {
     private String instagramUrl;
     private String githubUrl;
     private String description;
+
+    @OneToMany(mappedBy = "work", cascade = CascadeType.ALL)
+    private Set<DeveloperEntity> developers = new HashSet<>();
 
 }
