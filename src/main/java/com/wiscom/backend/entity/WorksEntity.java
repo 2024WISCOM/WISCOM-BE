@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,5 +31,8 @@ public class WorksEntity {
     private String instagramUrl;
     private String githubUrl;
     private String description;
+
+    @OneToMany(mappedBy = "work", cascade = CascadeType.ALL)
+    private List<DeveloperEntity> developers = new ArrayList<>();
 
 }
