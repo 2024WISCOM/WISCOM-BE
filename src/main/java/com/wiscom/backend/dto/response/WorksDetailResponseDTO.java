@@ -3,7 +3,7 @@ package com.wiscom.backend.dto.response;
 import com.wiscom.backend.entity.WorksEntity;
 import lombok.Getter;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
@@ -16,7 +16,7 @@ public class WorksDetailResponseDTO {
     private String instagramUrl;
     private String githubUrl;
     private String description;
-    private Set<DeveloperDTO> developers;
+    private List<DeveloperDTO> developers;
 
     public WorksDetailResponseDTO(WorksEntity work) {
         this.id = work.getId();
@@ -30,6 +30,6 @@ public class WorksDetailResponseDTO {
         this.description = work.getDescription();
         this.developers = work.getDevelopers().stream()
                 .map(DeveloperDTO::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }
