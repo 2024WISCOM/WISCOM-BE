@@ -13,9 +13,15 @@ public class guestbookService {
     private final guestbookRepository repository;
 
     public guestbookEntity saveEntry(guestbookDTO dto) {
-        guestbookEntity entity = new guestbookEntity(dto.getAuthor(), dto.getMessage(), dto.getRecipient());
-        return repository.save(entity);
+        try {
+            guestbookEntity entity = new guestbookEntity(dto.getAuthor(), dto.getMessage(), dto.getRecipient());
+            return repository.save(entity);
+        } catch (Exception e) {
+            e.printStackTrace(); // 또는 로깅 프레임워크를 사용하여 로그 기록
+            throw new RuntimeException("Error saving guestbook entry: " + e.getMessage());
+        }
     }
+
 
 
 }
