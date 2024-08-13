@@ -5,23 +5,25 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.wiscom.backend.dto.guestbook.guestbookDTO;
-import com.wiscom.backend.entity.guestbookEntity;
-import com.wiscom.backend.repository.guestbookRepository;
+
+import com.wiscom.backend.dto.guestbook.GuestbookDTO;
+
+import com.wiscom.backend.entity.GuestbookEntity;
+import com.wiscom.backend.repository.GuestbookRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class guestbookService {
+public class GuestbookService {
 
-    private final guestbookRepository repository;
+    private final GuestbookRepository repository;
 
-    public guestbookEntity saveEntry(guestbookDTO dto) {
-        guestbookEntity entity = new guestbookEntity(dto.getAuthor(), dto.getMessage(), dto.getRecipient());
+    public GuestbookEntity saveEntry(GuestbookDTO dto) {
+        GuestbookEntity entity = new GuestbookEntity(dto.getAuthor(), dto.getMessage(), dto.getRecipient());
         return repository.save(entity);
     }
 
-    public Page<guestbookEntity> getEntries(int page, int size) {
+    public Page<GuestbookEntity> getEntries(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.desc("createDate")));
         return repository.findAll(pageable);
     }
