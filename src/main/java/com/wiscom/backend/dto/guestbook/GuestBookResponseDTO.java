@@ -14,5 +14,5 @@ public class GuestBookResponseDTO {
     private int currentPage;
     private long totalElements;
     private int pageSize;
-    private List<GuestBookDTO.Res> guestBooks;
+    private List<GuestbookDTO.Res> guestBooks;
 }

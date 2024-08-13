@@ -1,11 +1,11 @@
 package com.wiscom.backend.service;
 
 import com.wiscom.backend.dto.guestbook.GuestBookResponseDTO;
+import com.wiscom.backend.dto.guestbook.GuestbookDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.wiscom.backend.dto.guestbook.GuestBookDTO;
 import com.wiscom.backend.entity.GuestbookEntity;
 import com.wiscom.backend.repository.GuestbookRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +19,10 @@ public class GuestbookService {
 
     private final GuestbookRepository repository;
 
-    public GuestBookDTO.Res saveEntry(GuestBookDTO dto) {
+    public GuestbookDTO.Res saveEntry(GuestbookDTO dto) {
         GuestbookEntity entity = new GuestbookEntity(dto.getAuthor(), dto.getMessage(), dto.getRecipient());
         GuestbookEntity guestbook = repository.save(entity);
-        return GuestBookDTO.Res.toDto(guestbook);
+        return GuestbookDTO.Res.toDto(guestbook);
     }
 
     @Transactional(readOnly = true)
@@ -31,8 +31,8 @@ public class GuestbookService {
         Page<GuestbookEntity> guestbookPage = repository.findAllByOrderByIdDesc(pageable);
         List<GuestbookEntity> notices = guestbookPage.getContent();
 
-        List<GuestBookDTO.Res> guestBookDTOS = notices.stream()
-                .map(GuestBookDTO.Res::toDto)
+        List<GuestbookDTO.Res> guestBookDTOS = notices.stream()
+                .map(GuestbookDTO.Res::toDto)
                 .toList();
 
         return GuestBookResponseDTO.builder()
