@@ -21,8 +21,8 @@ public class guestbookService {
         return repository.save(entity);
     }
 
-    public Page<guestbookEntity> getEntries(int page) {
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Order.desc("createDate")));
+    public Page<guestbookEntity> getEntries(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.desc("createDate")));
         return repository.findAll(pageable);
     }
 }
