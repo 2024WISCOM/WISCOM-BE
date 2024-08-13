@@ -1,22 +1,34 @@
 package com.wiscom.backend.dto.guestbook;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import com.wiscom.backend.entity.GuestbookEntity;
+import lombok.*;
 
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GuestbookDTO {
-    private final String author;
-    private final String message;
-    private final String recipient;
+    private String author;
+    private String message;
+    private String recipient;
 
-    @JsonCreator
-    public GuestbookDTO(
-            @JsonProperty("author") String author,
-            @JsonProperty("message") String message,
-            @JsonProperty("recipient") String recipient) {
-        this.author = author;
-        this.message = message;
-        this.recipient = recipient;
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Res {
+        private Long id;
+        private String author;
+        private String message;
+        private String recipient;
+
+        public static GuestbookDTO.Res toDto(GuestbookEntity entity) {
+            return Res.builder()
+                    .id(entity.getId())
+                    .author(entity.getAuthor())
+                    .message(entity.getMessage())
+                    .recipient(entity.getRecipient())
+                    .build();
+        }
     }
 }

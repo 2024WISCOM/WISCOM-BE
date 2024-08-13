@@ -9,5 +9,5 @@ import org.springframework.data.domain.Pageable;
 
 @Repository
 public interface GuestbookRepository extends JpaRepository<GuestbookEntity, Long> {
-	Page<GuestbookEntity> findAll(Pageable pageable);
+	Page<GuestbookEntity> findAllByOrderByIdDesc(Pageable pageable);
 }
