@@ -5,7 +5,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import com.wiscom.backend.dto.guestbook.GuestbookDTO;
+
 import com.wiscom.backend.entity.GuestbookEntity;
 import com.wiscom.backend.repository.GuestbookRepository;
 import lombok.RequiredArgsConstructor;
