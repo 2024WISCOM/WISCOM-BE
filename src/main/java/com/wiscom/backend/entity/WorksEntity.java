@@ -35,4 +35,6 @@ public class WorksEntity {
     @OneToMany(mappedBy = "work", cascade = CascadeType.ALL)
     private List<DeveloperEntity> developers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "work")
+    private List<ImageEntity> images = new ArrayList<>();
 }
