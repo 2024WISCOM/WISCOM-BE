@@ -17,6 +17,7 @@ public class WorksDetailResponseDTO {
     private String githubUrl;
     private String description;
     private List<DeveloperDTO> developers;
+    private List<ImageResponseDTO> images;
 
     public WorksDetailResponseDTO(WorksEntity work) {
         this.id = work.getId();
@@ -30,6 +31,10 @@ public class WorksDetailResponseDTO {
         this.description = work.getDescription();
         this.developers = work.getDevelopers().stream()
                 .map(DeveloperDTO::new)
+                .collect(Collectors.toList());
+
+        this.images = work.getImages().stream()
+                .map(ImageResponseDTO::new)
                 .collect(Collectors.toList());
     }
 }
