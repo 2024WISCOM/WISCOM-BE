@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-public class guestbookEntity {
+public class GuestbookEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class guestbookEntity {
     private String recipient;
     private LocalDateTime createDate; 
 
-    public guestbookEntity(String author, String message, String recipient) {
+    public GuestbookEntity(String author, String message, String recipient) {
         this.author = author;
         this.message = message;
         this.recipient = recipient;
