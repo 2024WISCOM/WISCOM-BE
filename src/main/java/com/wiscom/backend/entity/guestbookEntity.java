@@ -1,5 +1,7 @@
 package com.wiscom.backend.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,10 +20,13 @@ public class guestbookEntity {
     private String author;
     private String message;
     private String recipient;
+    private LocalDateTime createDate; 
 
     public guestbookEntity(String author, String message, String recipient) {
         this.author = author;
         this.message = message;
         this.recipient = recipient;
+        this.createDate = LocalDateTime.now(); 
     }
 }
+

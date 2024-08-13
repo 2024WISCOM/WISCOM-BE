@@ -1,12 +1,22 @@
 package com.wiscom.backend.dto.guestbook;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class guestbookDTO {
-    private final String author; // 작성자 (from)
-    private final String message; // 메세지
-    private final String recipient; // 받는 사람 (to)
+    private final String author;
+    private final String message;
+    private final String recipient;
+
+    @JsonCreator
+    public guestbookDTO(
+            @JsonProperty("author") String author,
+            @JsonProperty("message") String message,
+            @JsonProperty("recipient") String recipient) {
+        this.author = author;
+        this.message = message;
+        this.recipient = recipient;
+    }
 }
