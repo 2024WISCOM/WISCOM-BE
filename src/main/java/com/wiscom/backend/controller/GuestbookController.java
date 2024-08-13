@@ -1,13 +1,14 @@
 package com.wiscom.backend.controller;
 
+import com.wiscom.backend.dto.guestbook.GuestBookResponseDTO;
 import com.wiscom.backend.dto.response.ResponseDTO;
-import com.wiscom.backend.service.GuestbookService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import com.wiscom.backend.dto.guestbook.GuestbookDTO;
-import com.wiscom.backend.entity.GuestbookEntity;
+import com.wiscom.backend.dto.guestbook.GuestBookDTO;
+import com.wiscom.backend.service.GuestbookService;
 
 @RestController
 @RequestMapping("/api/guestbook")
@@ -16,22 +17,33 @@ public class GuestbookController {
 
     private final GuestbookService service;
 
-    @PostMapping("/entities")
-    public ResponseEntity<ResponseDTO<GuestbookEntity>> createEntry(@RequestBody GuestbookDTO dto) {
+    @PostMapping("/create")
+    public ResponseEntity<ResponseDTO<GuestBookDTO.Res>> createEntry(@RequestBody GuestBookDTO dto) {
         try {
-            GuestbookEntity createdEntity = service.saveEntry(dto);
-            ResponseDTO<GuestbookEntity> response = new ResponseDTO<>(
+            GuestBookDTO.Res createdEntity = service.saveEntry(dto);
+            ResponseDTO<GuestBookDTO.Res> response = new ResponseDTO<>(
                     HttpStatus.CREATED.value(),
-                    "방명록을 성공적으로 생성했습니다.",
+                    "방명록을 성공적으로 작성했습니다.",
                     createdEntity
             );
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (Exception e) {
-            ResponseDTO<GuestbookEntity> response = new ResponseDTO<>(
+            ResponseDTO<GuestBookDTO.Res> response = new ResponseDTO<>(
                     HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    "방명록 생성을 실패했습니다."
+                    "방명록 작성을 실패했습니다."
             );
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<ResponseDTO> list(
+            @RequestParam(value="page", defaultValue="0") int page,
+            @RequestParam(value="size", defaultValue="9") int size
+    ) {
+        GuestBookResponseDTO response = service.getEntries(page, size);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDTO(HttpStatus.OK.value(), "방명록을 성공적으로 조회했습니다.", response));
     }
 }
