@@ -6,18 +6,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import com.wiscom.backend.dto.guestbook.guestbookDTO;
+import com.wiscom.backend.dto.guestbook.GuestbookDTO;
 import com.wiscom.backend.entity.GuestbookEntity;
 
 @RestController
 @RequestMapping("/api/guestbook")
 @RequiredArgsConstructor
-public class guestbookController {
+public class GuestbookController {
 
     private final GuestbookService service;
 
     @PostMapping("/entities")
-    public ResponseEntity<ResponseDTO<GuestbookEntity>> createEntry(@RequestBody guestbookDTO dto) {
+    public ResponseEntity<ResponseDTO<GuestbookEntity>> createEntry(@RequestBody GuestbookDTO dto) {
         try {
             GuestbookEntity createdEntity = service.saveEntry(dto);
             ResponseDTO<GuestbookEntity> response = new ResponseDTO<>(
