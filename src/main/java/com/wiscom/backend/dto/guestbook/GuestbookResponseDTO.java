@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GuestBookResponseDTO {
+public class GuestbookResponseDTO {
     private int totalPages;
     private int currentPage;
     private long totalElements;

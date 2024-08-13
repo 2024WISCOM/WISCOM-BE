@@ -1,6 +1,6 @@
 package com.wiscom.backend.service;
 
-import com.wiscom.backend.dto.guestbook.GuestBookResponseDTO;
+import com.wiscom.backend.dto.guestbook.GuestbookResponseDTO;
 import com.wiscom.backend.dto.guestbook.GuestbookDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +26,7 @@ public class GuestbookService {
     }
 
     @Transactional(readOnly = true)
-    public GuestBookResponseDTO getEntries(int page, int size) {
+    public GuestbookResponseDTO getEntries(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<GuestbookEntity> guestbookPage = repository.findAllByOrderByIdDesc(pageable);
         List<GuestbookEntity> notices = guestbookPage.getContent();
@@ -35,7 +35,7 @@ public class GuestbookService {
                 .map(GuestbookDTO.Res::toDto)
                 .toList();
 
-        return GuestBookResponseDTO.builder()
+        return GuestbookResponseDTO.builder()
                 .totalPages(guestbookPage.getTotalPages())
                 .currentPage(guestbookPage.getNumber())
                 .totalElements(guestbookPage.getTotalElements())

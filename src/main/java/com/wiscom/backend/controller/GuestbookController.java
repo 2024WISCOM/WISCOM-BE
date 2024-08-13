@@ -1,7 +1,7 @@
 package com.wiscom.backend.controller;
 
 
-import com.wiscom.backend.dto.guestbook.GuestBookResponseDTO;
+import com.wiscom.backend.dto.guestbook.GuestbookResponseDTO;
 import com.wiscom.backend.dto.response.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +43,7 @@ public class GuestbookController {
             @RequestParam(value="page", defaultValue="0") int page,
             @RequestParam(value="size", defaultValue="9") int size
     ) {
-        GuestBookResponseDTO response = service.getEntries(page, size);
+        GuestbookResponseDTO response = service.getEntries(page, size);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ResponseDTO(HttpStatus.OK.value(), "방명록을 성공적으로 조회했습니다.", response));
