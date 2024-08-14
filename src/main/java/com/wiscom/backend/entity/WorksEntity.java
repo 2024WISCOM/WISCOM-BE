@@ -21,7 +21,6 @@ public class WorksEntity {
 
     //조회 페이지
     private String title;
-    private String category;
     private String imageUrl;
 
     //상세 페이지
@@ -37,4 +36,10 @@ public class WorksEntity {
 
     @OneToMany(mappedBy = "work")
     private List<ImageEntity> images = new ArrayList<>();
+
+    @ElementCollection(targetClass = CategoryEnum.class, fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "works_category", joinColumns = @JoinColumn(name = "work_id"))
+    @Column(name = "category")
+    private List<CategoryEnum> categories = new ArrayList<>();
 }
