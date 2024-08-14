@@ -5,15 +5,13 @@ import lombok.Getter;
 
 @Getter
 public class WorksResponseDTO {
-    private Long id;
-    private String title;
-    private String category;
-    private String imageUrl;
+    private final Long id;
+    private final String title;
+    private final String imageUrl;
 
     public WorksResponseDTO(WorksEntity work) {
         this.id = work.getId();
         this.title = work.getTitle();
-        this.category = work.getCategory();
         this.imageUrl = work.getImageUrl();
     }
 }
