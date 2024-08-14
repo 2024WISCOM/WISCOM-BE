@@ -1,8 +1,8 @@
 package com.wiscom.backend.controller;
 
 import com.wiscom.backend.dto.response.ResponseDTO;
-import com.wiscom.backend.dto.response.WorksDetailResponseDTO;
-import com.wiscom.backend.dto.response.WorksResponseDTO;
+import com.wiscom.backend.dto.works.WorksDetailResponseDTO;
+import com.wiscom.backend.dto.works.WorksResponseDTO;
 import com.wiscom.backend.service.WorksService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

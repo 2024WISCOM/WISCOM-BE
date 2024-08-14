@@ -1,10 +1,10 @@
-package com.wiscom.backend.dto.response;
+package com.wiscom.backend.dto.developer;
 
 import com.wiscom.backend.entity.DeveloperEntity;
 import lombok.Getter;
 
 @Getter
-class DeveloperDTO {
+public class DeveloperDTO {
     private String name;
     private String role;
 

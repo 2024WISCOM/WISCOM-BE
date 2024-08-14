@@ -1,7 +1,7 @@
 package com.wiscom.backend.service;
 
-import com.wiscom.backend.dto.response.WorksDetailResponseDTO;
-import com.wiscom.backend.dto.response.WorksResponseDTO;
+import com.wiscom.backend.dto.works.WorksDetailResponseDTO;
+import com.wiscom.backend.dto.works.WorksResponseDTO;
 import com.wiscom.backend.entity.CategoryEnum;
 import com.wiscom.backend.entity.WorksEntity;
 import com.wiscom.backend.exception.WorkNotFoundException;

@@ -19,6 +19,6 @@ public class DeveloperEntity {
     private String name;
     private String role;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private WorksEntity work;
 }

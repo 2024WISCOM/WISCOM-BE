@@ -1,4 +1,4 @@
-package com.wiscom.backend.dto.response;
+package com.wiscom.backend.dto.works;
 
 import com.wiscom.backend.entity.WorksEntity;
 import lombok.Getter;

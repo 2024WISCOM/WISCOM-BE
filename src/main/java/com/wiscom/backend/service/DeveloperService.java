@@ -1,6 +1,6 @@
 package com.wiscom.backend.service;
 
-import com.wiscom.backend.dto.response.DeveloperNameDTO;
+import com.wiscom.backend.dto.developer.DeveloperNameDTO;
 import com.wiscom.backend.repository.DeveloperRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
