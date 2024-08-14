@@ -19,7 +19,7 @@ public class ImageEntity {
     private String url;
 
     // 다대일 관계 설정
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_id")
     private WorksEntity work;
 }
