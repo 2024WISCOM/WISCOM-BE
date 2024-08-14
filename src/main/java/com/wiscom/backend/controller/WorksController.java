@@ -17,37 +17,19 @@ import java.util.List;
 public class WorksController {
     private final WorksService workService;
 
-    @GetMapping
-    public ResponseEntity<ResponseDTO<List<WorksResponseDTO>>> getWorks() {
-        List<WorksResponseDTO> works = workService.getAllWorks();
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ResponseDTO<>(HttpStatus.OK.value(), "Works 데이터를 성공적으로 조회했습니다.", works));
-    }
-
-    // all에서 상세 조회로 넘어간 경우
-    @GetMapping("/all/{id}")
-    public ResponseEntity<ResponseDTO<WorksDetailResponseDTO>> getWorkDetail(@PathVariable Long id) {
-        WorksDetailResponseDTO workDetail = workService.getWorkDetail(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ResponseDTO<>(HttpStatus.OK.value(), "Work detail 데이터를 성공적으로 조회했습니다.", workDetail));
-    }
-
-    // 카테고리로 필터링 한 상태에서 상세 조회로 넘어간 경우
-    @GetMapping("/category/{id}")
-    public ResponseEntity<ResponseDTO<WorksDetailResponseDTO>> getCategoryWorkDetail(@PathVariable Long id) {
-        WorksDetailResponseDTO workDetail = workService.getCategoryWorkDetail(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ResponseDTO<>(HttpStatus.OK.value(), "Work detail 데이터를 성공적으로 조회했습니다.", workDetail));
-    }
-
     @GetMapping("/category")
-    public ResponseEntity<ResponseDTO<List<WorksResponseDTO>>> getWorksByCategory(@RequestParam String category) {
-        List<WorksResponseDTO> works = workService.getWorksByCategory(category);
+    public ResponseEntity<ResponseDTO<List<WorksResponseDTO>>> getWorksByCategory(@RequestParam String type) {
+        List<WorksResponseDTO> works = workService.getWorksByCategory(type);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ResponseDTO<>(HttpStatus.OK.value(), "카테고리별 Works 데이터를 성공적으로 조회했습니다.", works));
+    }
+
+    @GetMapping("/category/{category}/{id}")
+    public ResponseEntity<ResponseDTO<WorksDetailResponseDTO>> getCategoryWorkDetail(@PathVariable("category") String category, @PathVariable("id") Long id) {
+        WorksDetailResponseDTO workDetail = workService.getWorkDetail(category, id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDTO<>(HttpStatus.OK.value(), "Work detail 데이터를 성공적으로 조회했습니다.", workDetail));
     }
 }
