@@ -25,7 +25,8 @@ public class WorksController {
                 .body(new ResponseDTO<>(HttpStatus.OK.value(), "Works 데이터를 성공적으로 조회했습니다.", works));
     }
 
-    @GetMapping("/{id}")
+    // all에서 상세 조회로 넘어간 경우
+    @GetMapping("/all/{id}")
     public ResponseEntity<ResponseDTO<WorksDetailResponseDTO>> getWorkDetail(@PathVariable Long id) {
         WorksDetailResponseDTO workDetail = workService.getWorkDetail(id);
         return ResponseEntity

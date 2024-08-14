@@ -21,9 +21,20 @@ public class WorksService {
                 .collect(Collectors.toList());
     }
 
+    // all에서 상세 조회로 넘어간 경우
     public WorksDetailResponseDTO getWorkDetail(Long id) {
-        WorksEntity work = worksRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Work not found"));
-        return new WorksDetailResponseDTO(work);
+        WorksEntity work = worksRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Work not found"));
+
+        Long prev = worksRepository.findFirstByIdLessThanOrderByIdDesc(id)
+                .map(WorksEntity::getId)
+                .orElseGet(() -> worksRepository.findTopByOrderByIdDesc().getId());
+
+        Long next = worksRepository.findFirstByIdGreaterThanOrderByIdAsc(id)
+                .map(WorksEntity::getId)
+                .orElseGet(() -> worksRepository.findTopByOrderByIdAsc().getId());
+
+        return new WorksDetailResponseDTO(work, prev, next);
     }
 
     public List<WorksResponseDTO> getWorksByCategory(String category) {
