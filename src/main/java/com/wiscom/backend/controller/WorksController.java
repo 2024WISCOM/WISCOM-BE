@@ -17,14 +17,6 @@ import java.util.List;
 public class WorksController {
     private final WorksService workService;
 
-    @GetMapping
-    public ResponseEntity<ResponseDTO<List<WorksResponseDTO>>> getWorks() {
-        List<WorksResponseDTO> works = workService.getAllWorks();
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ResponseDTO<>(HttpStatus.OK.value(), "Works 데이터를 성공적으로 조회했습니다.", works));
-    }
-
     // all에서 상세 조회로 넘어간 경우
     @GetMapping("/all/{id}")
     public ResponseEntity<ResponseDTO<WorksDetailResponseDTO>> getWorkDetail(@PathVariable Long id) {

@@ -16,12 +16,6 @@ import java.util.stream.Collectors;
 public class WorksService {
     private final WorksRepository worksRepository;
 
-    public List<WorksResponseDTO> getAllWorks() {
-        return worksRepository.findAll().stream()
-                .map(WorksResponseDTO::new)
-                .collect(Collectors.toList());
-    }
-
     // all에서 상세 조회로 넘어간 경우
     public WorksDetailResponseDTO getWorkDetail(Long id) {
         WorksEntity work = worksRepository.findById(id)
@@ -62,6 +56,13 @@ public class WorksService {
     }
 
     public List<WorksResponseDTO> getWorksByCategory(String categoryString) {
+        // 전체 조회인지 비교
+        if(categoryString.equalsIgnoreCase("ALL")) {
+            return worksRepository.findAll().stream()
+                    .map(WorksResponseDTO::new)
+                    .collect(Collectors.toList());
+        }
+
         // 문자열을 CategoryEnum으로 변환
         CategoryEnum category = CategoryEnum.valueOf(categoryString.toUpperCase());
 
