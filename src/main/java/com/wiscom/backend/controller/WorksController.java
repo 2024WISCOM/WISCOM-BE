@@ -25,9 +25,19 @@ public class WorksController {
                 .body(new ResponseDTO<>(HttpStatus.OK.value(), "Works 데이터를 성공적으로 조회했습니다.", works));
     }
 
-    @GetMapping("/{id}")
+    // all에서 상세 조회로 넘어간 경우
+    @GetMapping("/all/{id}")
     public ResponseEntity<ResponseDTO<WorksDetailResponseDTO>> getWorkDetail(@PathVariable Long id) {
         WorksDetailResponseDTO workDetail = workService.getWorkDetail(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDTO<>(HttpStatus.OK.value(), "Work detail 데이터를 성공적으로 조회했습니다.", workDetail));
+    }
+
+    // 카테고리로 필터링 한 상태에서 상세 조회로 넘어간 경우
+    @GetMapping("/category/{id}")
+    public ResponseEntity<ResponseDTO<WorksDetailResponseDTO>> getCategoryWorkDetail(@PathVariable Long id) {
+        WorksDetailResponseDTO workDetail = workService.getCategoryWorkDetail(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ResponseDTO<>(HttpStatus.OK.value(), "Work detail 데이터를 성공적으로 조회했습니다.", workDetail));
