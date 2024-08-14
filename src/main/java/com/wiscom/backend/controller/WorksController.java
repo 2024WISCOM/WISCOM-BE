@@ -34,6 +34,15 @@ public class WorksController {
                 .body(new ResponseDTO<>(HttpStatus.OK.value(), "Work detail 데이터를 성공적으로 조회했습니다.", workDetail));
     }
 
+    // 카테고리로 필터링 한 상태에서 상세 조회로 넘어간 경우
+    @GetMapping("/category/{id}")
+    public ResponseEntity<ResponseDTO<WorksDetailResponseDTO>> getCategoryWorkDetail(@PathVariable Long id) {
+        WorksDetailResponseDTO workDetail = workService.getCategoryWorkDetail(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDTO<>(HttpStatus.OK.value(), "Work detail 데이터를 성공적으로 조회했습니다.", workDetail));
+    }
+
     @GetMapping("/category")
     public ResponseEntity<ResponseDTO<List<WorksResponseDTO>>> getWorksByCategory(@RequestParam String category) {
         List<WorksResponseDTO> works = workService.getWorksByCategory(category);
