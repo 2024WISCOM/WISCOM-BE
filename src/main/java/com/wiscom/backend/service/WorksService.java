@@ -4,6 +4,9 @@ import com.wiscom.backend.dto.response.WorksDetailResponseDTO;
 import com.wiscom.backend.dto.response.WorksResponseDTO;
 import com.wiscom.backend.entity.CategoryEnum;
 import com.wiscom.backend.entity.WorksEntity;
+import com.wiscom.backend.exception.WorkNotFoundException;
+import com.wiscom.backend.exception.InvalidCategoryException;
+import com.wiscom.backend.exception.WorkNotInCategoryException;
 import com.wiscom.backend.repository.WorksRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,14 +21,19 @@ public class WorksService {
 
     public List<WorksResponseDTO> getWorksByCategory(String categoryString) {
         // 전체 조회인지 비교
-        if(categoryString.equalsIgnoreCase("ALL")) {
+        if (categoryString.equalsIgnoreCase("ALL")) {
             return worksRepository.findAll().stream()
                     .map(WorksResponseDTO::new)
                     .collect(Collectors.toList());
         }
 
         // 문자열을 CategoryEnum으로 변환
-        CategoryEnum category = CategoryEnum.valueOf(categoryString.toUpperCase());
+        CategoryEnum category;
+        try {
+            category = CategoryEnum.valueOf(categoryString.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new InvalidCategoryException(categoryString);
+        }
 
         // 해당 카테고리를 포함하는 WorksEntity를 조회
         return worksRepository.findByCategoriesContaining(category).stream()
@@ -35,9 +43,9 @@ public class WorksService {
 
     public WorksDetailResponseDTO getWorkDetail(String categoryString, Long id) {
         // 전체 조회인지 비교
-        if(categoryString.equalsIgnoreCase("ALL")) {
+        if (categoryString.equalsIgnoreCase("ALL")) {
             WorksEntity work = worksRepository.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Work not found"));
+                    .orElseThrow(() -> new WorkNotFoundException(id));
 
             Long prev = worksRepository.findFirstByIdLessThanOrderByIdDesc(id)
                     .map(WorksEntity::getId)
@@ -50,14 +58,19 @@ public class WorksService {
             return new WorksDetailResponseDTO(work, prev, next);
         }
 
-        CategoryEnum category = CategoryEnum.valueOf(categoryString.toUpperCase());
+        CategoryEnum category;
+        try {
+            category = CategoryEnum.valueOf(categoryString.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new InvalidCategoryException(categoryString);
+        }
 
         WorksEntity work = worksRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Work not found"));
+                .orElseThrow(() -> new WorkNotFoundException(id));
 
         // 현재 Work에 해당 카테고리가 포함되어 있는지 확인
         if (!work.getCategories().contains(category)) {
-            throw new IllegalArgumentException("Work does not belong to the specified category");
+            throw new WorkNotInCategoryException(id, categoryString);
         }
 
         Long prev = worksRepository.findFirstByIdLessThanAndCategoriesContainingOrderByIdDesc(id, category)
