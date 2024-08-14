@@ -1,6 +1,6 @@
 package com.wiscom.backend.controller;
 
-import com.wiscom.backend.dto.response.DeveloperNameDTO;
+import com.wiscom.backend.dto.developer.DeveloperNameDTO;
 import com.wiscom.backend.dto.response.ResponseDTO;
 import com.wiscom.backend.service.DeveloperService;
 import lombok.RequiredArgsConstructor;
