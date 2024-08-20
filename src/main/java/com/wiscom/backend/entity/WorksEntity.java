@@ -29,6 +29,7 @@ public class WorksEntity {
     private String teamName;
     private String instagramUrl;
     private String githubUrl;
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @OneToMany(mappedBy = "work", cascade = CascadeType.ALL)
