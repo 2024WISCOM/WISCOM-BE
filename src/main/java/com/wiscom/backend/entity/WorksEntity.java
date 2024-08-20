@@ -39,7 +39,7 @@ public class WorksEntity {
 
     @ElementCollection(targetClass = CategoryEnum.class, fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "works_category", joinColumns = @JoinColumn(name = "work_id"))
+    @CollectionTable(name = "WorksCategory", joinColumns = @JoinColumn(name = "work_id"))
     @Column(name = "category")
     private List<CategoryEnum> categories = new ArrayList<>();
 }
