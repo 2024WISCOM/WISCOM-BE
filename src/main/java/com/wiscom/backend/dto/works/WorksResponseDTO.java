@@ -10,6 +10,7 @@ public class WorksResponseDTO {
     private final String imageUrl;
     private final String teamName;
 
+
     public WorksResponseDTO(WorksEntity work) {
         this.id = work.getId();
         this.title = work.getTitle();
