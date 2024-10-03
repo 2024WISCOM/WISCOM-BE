@@ -2,10 +2,7 @@ package com.wiscom.backend.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +15,7 @@ public class GuestbookEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String author;
+    @Column(columnDefinition = "TEXT")
     private String message;
     private String recipient;
     private LocalDateTime createDate; 
