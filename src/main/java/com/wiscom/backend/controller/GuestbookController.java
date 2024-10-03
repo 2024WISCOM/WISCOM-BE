@@ -48,4 +48,22 @@ public class GuestbookController {
                 .status(HttpStatus.OK)
                 .body(new ResponseDTO(HttpStatus.OK.value(), "방명록을 성공적으로 조회했습니다.", response));
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<ResponseDTO> search(
+        @RequestParam("keyword") String keyword,
+        @RequestParam(value = "page", defaultValue = "0") int page,
+        @RequestParam(value = "size", defaultValue = "9") int size
+    ) {
+    try {
+        GuestbookResponseDTO response = service.searchEntries(keyword, page, size);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDTO(HttpStatus.OK.value(), "검색 결과를 성공적으로 조회했습니다.", response));
+    } catch (Exception e) {
+        e.printStackTrace();
+        ResponseDTO response = new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(), "방명록 검색 중 오류가 발생했습니다.");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+}
 }
