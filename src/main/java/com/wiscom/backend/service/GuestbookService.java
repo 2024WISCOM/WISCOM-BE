@@ -43,4 +43,22 @@ public class GuestbookService {
                 .guestBooks(guestBookDTOS)
                 .build();
     }
+
+
+    @Transactional(readOnly = true)
+    public GuestbookResponseDTO searchEntries(String keyword, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<GuestbookEntity> guestbookPage = repository.searchByKeyword(keyword, pageable);
+        List<GuestbookDTO.Res> guestBookDTOS = guestbookPage.getContent().stream()
+                .map(GuestbookDTO.Res::toDto)
+                .toList();
+
+        return GuestbookResponseDTO.builder()
+                .totalPages(guestbookPage.getTotalPages())
+                .currentPage(guestbookPage.getNumber())
+                .totalElements(guestbookPage.getTotalElements())
+                .pageSize(guestbookPage.getSize())
+                .guestBooks(guestBookDTOS)
+                .build();
+    }
 }
